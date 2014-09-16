@@ -1,19 +1,213 @@
-<html>
-<style>
-html { 
-  background: url(disney.jpg) no-repeat center center fixed; 
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
-}
-h1,h2,h3{
-	color:white;
-}
-</style>
+<!DOCTYPE html>
+<html lang="en">
 
-<h1 align="Center" style="font-color:white;">Jabez Wesly</h1>
-<br>
-<h2 align="center"> Programmer. Poet. Photographer. </h2>
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Jabez Wesly</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="css/grayscale.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="font-awesome-4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
+                    <i class="fa fa-bars"></i>
+                </button>
+                <a class="navbar-brand page-scroll" href="#page-top">
+                    <i class="glyphicon glyphicon-home"></i> Jabez Wesly
+                </a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse navbar-right navbar-main-collapse">
+                <ul class="nav navbar-nav">
+                    <!-- Hidden li included to remove active class from about link when scrolled up past about section -->
+					<li class="hidden">
+                        <a href="#page-top"></a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="#about">What I Do</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="#projects">Projects</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="#contact">Contact</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+
+    <!-- Intro Header -->
+    <header class="intro">
+        <div class="intro-body">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-8 col-md-offset-2">
+                        <h1 class="brand-heading"><br>Jabez Wesly</h1>
+                        <h1><small>Photographer. Philosopher. Programmer. </small></h1>
+                        <div align="center">
+						<blockquote>
+						<p class="intro-quote">"As a photographer, I observe the world. As a philosopher, I understand the world. As a programmer, I create the world."<br><br>~Jabez Wesly
+						</blockquote>
+						</div>
+                        <p class="intro-text"><br><br></p>
+                        <a href="#about" class="btn btn-circle page-scroll">
+                            <i class="fa fa-angle-double-down animated"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- About Section -->
+    <section id="about" class="container content-section text-center">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2">
+                <h2>What I Do</h2>
+                <p>I am a Junior at the Middlesex County Academy for Science, Mathematics, and Engineering Technologies. My many interests include:
+                <ul style="text-align:left; font-size:25px; list-style-image:url(img/right_chevron.png); vertical-align:middle;">
+                <li>&nbsp;&nbsp;&nbsp; Programming</li>
+                <li>&nbsp;&nbsp;&nbsp; Attending hackathons </li>
+                <li>&nbsp;&nbsp;&nbsp; Participating in clubs such as :
+                <ul style="list-style-image:url(doesntexist.jpg); list-style-type:square; font-size:20px;">
+	                <li> Debate </li>
+	                <li> Model United Nations </li>
+	                <li> Chess </li> 
+	                <li> Academic Team </li></ul>
+                <li>&nbsp;&nbsp;&nbsp; Playing Piano </li>
+                <li>&nbsp;&nbsp;&nbsp; Amateur Photography </li>
+                </ul></p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Download Section -->
+    <section id="projects" class="content-section text-center">
+    <h1>My Projects</h1>
+        <div id="myCarousel" class="carousel slide" data-ride="carousel">
+      <!-- Indicators -->
+      <ol class="carousel-indicators">
+        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+        <li data-target="#myCarousel" data-slide-to="1"></li>
+        <li data-target="#myCarousel" data-slide-to="2"></li>
+      </ol>
+      
+      <div class="carousel-inner">
+        <div class="item active">
+          <img src="img/Slide1.gif" alt="First slide" class="center">
+          <div class="container">
+            <div class="carousel-caption">
+              <h1>Guardian Angel</h1>
+              <p>Guardian Angel uses NFC technologies and the Twilio text messaging API for swift communication between health proffessionals in a hospital environment. Was developed at HackBCA 2014.</p>
+              <p><a class="btn btn-lg btn-primary" href="http://challengepost.com/software/guardianangel" role="button">Learn More</a></p>
+            </div>
+          </div>
+        </div>
+        <div class="item">
+          <img src="img/Slide2.gif" alt="Second slide" class="center">
+          <div class="container">
+            <div class="carousel-caption">
+              <h1 align="right">PushApp<br><small>Touch it With Your Nose!</small><h1>
+              <p align="right">Concept developed at 3 AM in the morning at HackBCA 2014. Touch the screen with your nose while Gordon Ramsay encourages you.</p>
+              <p><a class="btn btn-lg btn-primary" href="http://challengepost.com/software/pushapp" role="button">Learn more</a></p>
+            </div>
+          </div>
+        </div>
+        <div class="item">
+          <img src="img/Slide3.gif" alt="Third slide" class="center">
+          <div class="container">
+            <div class="carousel-caption">
+              <h1>Carpoolr<br><small>A fair way to carpool</small></h1>
+              <p>Know that one person who always finds a way out of driving during a carpool? Make sure they do their fair share by using Carpoolr. Based on an IBM Research paper, Carpoolr's algorithm objectively determines the person who should drive each day. Was developed at PennApps X in 2014.</p>
+              <p><a class="btn btn-lg btn-primary" href="http://challengepost.com/software/carpoolr" role="button">Learn More</a></p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a>
+      <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
+    </div><!-- /.carousel -->
+    </section>
+
+    <!-- Contact Section -->
+	<section id="contact" class="container content-section text-center">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2">
+                <h2>Contact Me</h2>
+                <p>Please email feedback, questions, or anything else to me at <a href="wjabezkingsly@gmail.com">wjabezkingsly@gmail.com</a>
+                </p>
+                <!--
+                <ul class="list-inline banner-social-buttons">
+                    <li>
+                        <a href="https://twitter.com/SBootstrap" class="btn btn-default btn-lg"><i class="fa fa-twitter fa-fw"></i> <span class="network-name">Twitter</span></a>
+                    </li>
+                    <li>
+                        <a href="https://github.com/IronSummitMedia/startbootstrap" class="btn btn-default btn-lg"><i class="fa fa-github fa-fw"></i> <span class="network-name">Github</span></a>
+                    </li>
+                    <li>
+                        <a href="https://plus.google.com/+Startbootstrap/posts" class="btn btn-default btn-lg"><i class="fa fa-google-plus fa-fw"></i> <span class="network-name">Google+</span></a>
+                    </li>
+                </ul>-->
+            </div>
+        </div>
+    </section>
+
+    <!-- Map Section -->
+
+    <!-- Footer -->
+    <footer>
+        <div class="container text-center">
+            <p>Copyright &copy; Jabez Wesly, 2014</p>
+        </div>
+    </footer>
+
+    <!-- jQuery Version 1.11.0 -->
+    <script src="js/jquery-1.11.0.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+
+    <!-- Plugin JavaScript -->
+    <script src="js/jquery.easing.min.js"></script>
+
+    <!-- Google Maps API Key - Use your own API key to enable the map feature. More information on the Google Maps API can be found at https://developers.google.com/maps/ -->
+
+    <!-- Custom Theme JavaScript -->
+    <script src="js/grayscale.js"></script>
+
+</body>
 
 </html>

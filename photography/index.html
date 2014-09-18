@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Jabez's Photos</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <style>
+    body {
+    width: 100%;
+    height: 100%;
+    font-family: Lora,"Helvetica Neue",Helvetica,Arial,sans-serif;
+    color: #fff;
+    background-color: #000;
+}
+h1{
+	margin-top: 60px;
+	margin-bottom: 50px;
+}
+    #foto img{
+    	width:70%;
+    	margin-left: auto;
+    	margin-right: auto;
+    }
+    </style>
+</head>
+
+<body>
+<h1 align="center">My Favorite Pictures</h1>
+
+<section id="photos" class="content-section text-center">
+<div id="foto" class="carousel slide" data-ride="carousel" data-slides="16">
+      <!-- Indicators -->
+      <ol class="carousel-indicators">
+      </ol>
+      <div class="carousel-inner">
+
+      </div>
+      <a class="left carousel-control" href="#foto" role="button" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a>
+      <a class="right carousel-control" href="#foto" role="button" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
+
+</div>
+
+<section class="container content-section text-center">
+<h4><a href="http://jabez.org">Return to Jabez.org</a></h4>
+</section>
+<script src="../js/jquery-1.11.0.js"></script>
+
+
+
+ <!-- Bootstrap Core JavaScript -->
+ <script src="../js/bootstrap.min.js"></script>
+
+<script>
+$(document).ready(function(){
+var photonum = $("#foto").data("slides");
+for(var i = 0; i < photonum; i++)
+{
+	if(i == 0)
+	{
+		var indicator = "<li data-target='#foto' data-slide-to='0' class='active'></li>";
+		var p = "<div class='item active'><img src='pic/0.jpg' alt='A Picture' class='center'></div>";
+	}
+	else
+	{
+		var indicator = "<li data-target='#foto' data-slide-to='" + i + "'></li>";
+		var p = "<div class='item'><img src='pic/" + i + ".jpg' alt='A Picture' class='center'></div>";
+	}
+	console.log(indicator);
+	$("#foto .carousel-indicators").append(indicator);
+	
+	console.log(p);
+	$("#photos .carousel-inner").append(p);
+}
+/*$("#photos").carousel("pause").removeData();
+$("#photos").carousel(9);*/
+});
+</script>
+</body>

@@ -10,6 +10,10 @@
 
     <title>Jabez's Poetry</title>
 
+    <link href="../font-awesome-4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+
     <!-- Bootstrap Core CSS -->
     <link href="../css/bootstrap.min.css" rel="stylesheet">
     <style>
@@ -21,27 +25,58 @@
     background-color: #000;
 }
 h1{
-	margin-top: 60px;
+	margin-top: 40px;
 	margin-bottom: 50px;
 	font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
     font-weight: 700;
     font-size: 60px;
     text-transform: uppercase;
 }
+body{
+    background-image: url(background.jpg);
+}
+
 #poemBox{
-    width:75%;
+    width:80%;
     margin-right: auto;
     margin-left: auto;
+    text-align:center;
 }
+
+#poemBox section{
+    width:50%;
+    margin-top:30px;
+    margin-bottom: 30px;
+    margin-right: auto;
+    margin-left: auto;
+    background-color:black;
+    border: solid gray 5px;
+}
+
+#return{
+    text-align:center;
+    padding-top:20px;
+    padding-bottom:35px;
+    background-color:black;
+}
+
 </style>
 </head>
 <body>
 
-<h1 align="center">A Poet's Corner</h1>
+<h1 align="center">Poet's Corner</h1>
 
 <div id="poemBox">
 
 </div>
+
+<section id="return">
+<h3><br>All poems written by Jabez Wesly</h3>
+<h4><a href="http://jabez.org">Return to Jabez.org</a></h4>
+</section>
+
+
+
 
 
 <script src="../js/jquery-1.11.0.js"></script>
@@ -51,8 +86,13 @@ h1{
         $.ajax({
             url: "poems/" + file,
             success: function(xml){
-                console.log(xml);
-                $("#poemBox").append(xml);
+                //console.log(xml);
+                var poem = $(xml).find("poem").text();
+                var title = $(xml).find("title").text();
+                poem = poem.replace(/\n/g,"<br />");
+                var section = "<section id='" + title + "'><h3>" + title + "</h3><p>" + poem + "</p></section>";
+                //console.log(x);
+                $("#poemBox").append(section);
             }
         });
         return "Swag";

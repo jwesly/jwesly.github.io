@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Jabez's Poetry</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <style>
+    body {
+    width: 100%;
+    height: 100%;
+    font-family: Lora,"Helvetica Neue",Helvetica,Arial,sans-serif;
+    color: #fff;
+    background-color: #000;
+}
+h1{
+	margin-top: 60px;
+	margin-bottom: 50px;
+	font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-weight: 700;
+    font-size: 60px;
+    text-transform: uppercase;
+}
+#poemBox{
+    width:75%;
+    margin-right: auto;
+    margin-left: auto;
+}
+</style>
+</head>
+<body>
+
+<h1 align="center">A Poet's Corner</h1>
+
+<div id="poemBox">
+
+</div>
+
+
+<script src="../js/jquery-1.11.0.js"></script>
+<script src="../js/bootstrap.min.js"></script>
+<script type="text/javascript">
+    var poem = function(file){
+        $.ajax({
+            url: "poems/" + file,
+            success: function(xml){
+                console.log(xml);
+                $("#poemBox").append(xml);
+            }
+        });
+        return "Swag";
+    }
+
+    $(document).ready(function(){
+        var poemNum = 1;
+        for(var i = 0; i < poemNum; i++){
+            var text = poem(i + ".xml");
+        }
+    });
+</script>
+ </body>
+ </html>

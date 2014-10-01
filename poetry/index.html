@@ -34,6 +34,8 @@ h1{
 }
 body{
     background-image: url(background.jpg);
+    background-repeat:none;
+    background-attachment: fixed;
 }
 
 #poemBox{
@@ -47,6 +49,7 @@ body{
     width:50%;
     margin-top:30px;
     margin-bottom: 30px;
+    padding-bottom:12px;
     margin-right: auto;
     margin-left: auto;
     background-color:black;
@@ -55,8 +58,8 @@ body{
 
 #return{
     text-align:center;
-    padding-top:20px;
-    padding-bottom:35px;
+    padding-top:5px;
+    padding-bottom:15px;
     background-color:black;
 }
 
@@ -71,7 +74,7 @@ body{
 </div>
 
 <section id="return">
-<h3><br>All poems written by Jabez Wesly</h3>
+<h3>All poems written by Jabez Wesly</h3>
 <h4><a href="http://jabez.org">Return to Jabez.org</a></h4>
 </section>
 
@@ -99,7 +102,7 @@ body{
     }
 
     $(document).ready(function(){
-        var poemNum = 1;
+        var poemNum = 2;
         for(var i = 0; i < poemNum; i++){
             var text = poem(i + ".xml");
         }

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+html,body{
+	height:100%;
+	margin:0;
+}
+#googleMap{
+	min-height:100%;
+}
+</style>
+<script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyC4RcCLxV4IY9UL5O26zJR5D0swWPKrOwA&sensor=false"></script>
+
+<script>
+function initialize()
+{
+var mapProp = {
+  center:new google.maps.LatLng(0,0),
+  zoom:2,
+  mapTypeId:google.maps.MapTypeId.HYBRID
+  };
+var map=new google.maps.Map(document.getElementById("googleMap")
+  ,mapProp);
+}
+
+google.maps.event.addDomListener(window, 'load', initialize);
+</script>
+<body>
+
+<div id="googleMap"></div>
+
+</body>
+
+</head>
+</html>

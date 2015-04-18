@@ -1,0 +1,98 @@
+<html>
+<head>
+<title>Beta WebGL</title>
+</head>
+<body>
+    <script src="js/three.min.js"></script>
+    <script src="js/OrbitControls.js"></script>
+<script>
+    
+    var world;
+
+    var WORLD = function(){
+        var floor,f1,f2;
+        this.START = {x:-5000,y:-5000,z:-5000};
+        this.END = {x:5000,y:5000,z:5000};
+
+
+        this.scene = new THREE.Scene();
+        this.camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 1, 1.8*Math.max(this.END.x-this.START.x, this.END.y-this.START.y, this.END.z-this.START.z) );
+        this.camera.position.z = -3000;
+        this.camera.position.y = -4500;
+        this.camera.position.x = -1200;
+        this.controls = new THREE.OrbitControls( this.camera );
+
+
+        this.cube = new THREE.Mesh( new THREE.BoxGeometry(200,200,200), new THREE.MeshBasicMaterial({ color: 0xff0000}) );
+        this.cube.position.y = -2000;
+        this.scene.add(this.cube);
+
+        this.walls = {};
+        this.walls.H = 1/3;
+        this.walls.Y = this.walls.H*(1/2)*(this.END.y-this.START.y) + this.START.y;//center of wall must be calculated like so
+        this.walls.color = 0x272727;
+        this.walls.front = new THREE.Mesh(new THREE.PlaneGeometry(this.END.x - this.START.x, this.walls.H*(this.END.y - this.START.y)),
+                                            new THREE.MeshBasicMaterial({color:this.walls.color, wireframe: false, side:THREE.DoubleSide}));
+        this.walls.front.position.set(0,this.walls.Y,this.START.z);
+        
+        this.walls.back = new THREE.Mesh(new THREE.PlaneGeometry(this.END.x - this.START.x, this.walls.H*(this.END.y - this.START.y)),
+                                  new THREE.MeshBasicMaterial({color:this.walls.color, wireframe: false, side:THREE.DoubleSide}));
+        this.walls.back.position.set(0,this.walls.Y,this.END.z);
+
+        this.walls.right = new THREE.Mesh(new THREE.PlaneGeometry(this.END.z - this.START.z, this.walls.H*(this.END.y - this.START.y)),
+                                  new THREE.MeshBasicMaterial({color:this.walls.color, wireframe: false, side:THREE.DoubleSide}));
+        this.walls.right.rotation.y = Math.PI/2;
+        this.walls.right.position.set(this.START.x,this.walls.Y,0);
+
+        this.walls.left = new THREE.Mesh(new THREE.PlaneGeometry(this.END.z - this.START.z, this.walls.H*(this.END.y - this.START.y)),
+                                  new THREE.MeshBasicMaterial({color:this.walls.color, wireframe: false, side:THREE.DoubleSide}));
+        this.walls.left.rotation.y = Math.PI/2;
+        this.walls.left.position.set(this.END.x,this.walls.Y,0);
+        this.corner={};
+        this.corner.one = new THREE.Mesh(new THREE.CylinderGeometry(500,500, this.walls.H*(this.END.y - this.START.y), 20),new THREE.MeshBasicMaterial({color:this.walls.color}))
+        this.corner.one.position.set(this.START.x,this.walls.Y,this.START.z);
+
+        this.scene.add(this.walls.front);
+        this.scene.add(this.walls.back);
+        this.scene.add(this.walls.right);
+        this.scene.add(this.walls.left);
+        this.scene.add(this.corner.one);
+
+
+        var texture = THREE.ImageUtils.loadTexture('floor.png');
+        texture.wrapS = THREE.RepeatWrapping;
+        texture.wrapT = THREE.RepeatWrapping;
+        texture.repeat.x = 20;
+        texture.repeat.y = 20;
+
+
+        f1 = new THREE.PlaneGeometry(this.END.x - this.START.x, this.END.z - this.START.z,1,1);
+        f2 = new THREE.MeshBasicMaterial({color:0x0000ff, wireframe: false, map:texture, side:THREE.DoubleSide});
+        floor = new THREE.Mesh(f1,f2);
+        floor.position.set(0,this.START.y,0);
+        floor.rotation.x = Math.PI / 2;
+
+        this.scene.add(floor);
+        
+        
+
+        this.renderer = new THREE.WebGLRenderer();
+        this.renderer.setSize( window.innerWidth, window.innerHeight );
+
+        document.body.appendChild( this.renderer.domElement );
+    };
+
+    WORLD.prototype.animate = function() {
+        var that = this;
+        window.requestAnimationFrame(function() { that.animate(); });
+        this.cube.rotation.x += 0.01;
+        this.cube.rotation.y += 0.02;
+
+        this.renderer.render( this.scene, this.camera );
+
+    }
+    world = new WORLD();
+    world.animate();
+</script>
+</body>
+</html>

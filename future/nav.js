@@ -1,5 +1,5 @@
 var sections = $(".section-container section").size();
-console.log("Sections: ",sections);
+
 for(i=0;i<sections;i++){
 	var item = $("<li></li>").data("position",i).click(function(){
 		changeSection($(this).data("position"));
@@ -25,14 +25,12 @@ var changeSection = function(target){
 changeSection(0);
 
 document.body.addEventListener("wheel",function(event){
-	if(event.deltaY>0){
+	if(event.deltaY>0||event.deltaX>0){
 		var target = ($("ul.nav li.active").data("position")+1)%sections;
-		//alert(target);
 		changeSection(target);
 	}
-	else if(event.deltaY<0){
-		var target = ($("ul.nav li.active").data("position")-1)%sections;
-		//alert(target);
+	else if(event.deltaY<0||event.deltaX<0){
+		var target = (($("ul.nav li.active").data("position")-1)%sections+sections)%sections;
 		changeSection(target);
 	}
 })

@@ -7,12 +7,12 @@ nav{
 	left: 0;
 	width: 100%;
 	z-index: 9999;
-	height: 5em;
+	height: 12%;
 	background-color: #00a087;
 }/*top of section container MUST equal height of nav*/
 .section-container{
 	position:absolute;
-	top:5em;
+	height:88%;
 	width:100%;
 	bottom:0em;
 }
@@ -29,7 +29,7 @@ nav img{
 	padding-right: 2em;
 }
 .my-name{
-	font-size:2.5em;
+	font-size:7vh;/* 7% of height*/
 	font-family: 'Orbitron', sans-serif;
 	padding-left: 1em;
 	color:white;
@@ -46,7 +46,7 @@ section div.section_title{
 	font-family: 'Alfa Slab One', cursive;
 	font-size:2em;
 	text-align:center;
-	width:35%;
+	width:50%;
 	margin:auto;
 	color:orange;
 }

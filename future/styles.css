@@ -1,5 +1,6 @@
 body{
 	margin:0;
+	z-index: 1;
 }
 nav{
 	position: fixed;
@@ -80,5 +81,23 @@ ul.nav span{
 }
 ul.nav li.active span{
 	background-color:green;
+}
+
+div.explain{
+	position: relative;
+	top:30%;
+	bottom:70%;
+	width:58%;
+	margin:auto;
+	color:white;
+	font-size: 1.5em;
+	text-align: center;
+}
+span.explain{
+	position:absolute;
+	left:8vw;
+
+	font-family: 'Open Sans', sans-serif;
+	font-size: 2em;
 }
 

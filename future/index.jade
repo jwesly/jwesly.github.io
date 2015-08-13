@@ -5,6 +5,7 @@ html(lang="en")
     link(rel='stylesheet',type='text/css',href='styles.css')
     link(href='http://fonts.googleapis.com/css?family=Orbitron:500',rel='stylesheet',type='text/css')
     link(href='http://fonts.googleapis.com/css?family=Alfa+Slab+One' rel='stylesheet' type='text/css')
+    link(href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css')
   body
     //I need a navbar
     nav.fixed-bar
@@ -13,12 +14,24 @@ html(lang="en")
       a(href='https://www.linkedin.com/pub/jabez-wesly/a0/181/b25',target="_blank"): img(src='linkedin2.png')
       //a(href='http://images.google.com'): img(src='camera.gif')
     div.section-container
-      section
+      section#0
         div.section_title Who Am I?
-      section
+        div.explain
+          span.explain
+            span.static
+            span.dynamic
+      section#1
         div.section_title What Do I Do?
-      section
+        div.explain
+          span.explain
+            span.static
+            span.dynamic
+      section#2
         div.section_title What Have I Done?
+        div.explain
+          span.explain
+            span.static
+            span.dynamic
       ul.nav
       script(src="jquery-1.11.0.js")
       script(src="nav.js")

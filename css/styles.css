@@ -49,7 +49,8 @@ section div.section_title{
 	text-align:center;
 	width:50%;
 	margin:auto;
-	color:orange;
+	color:yellow;
+	z-index: 1;
 }
 
 ul.nav{
@@ -60,14 +61,13 @@ ul.nav{
 	list-style: none;
 	background-color: #232323;
 	padding: 1em;
+	border-radius: 10px;
+	opacity: .9;
 }
 ul.nav li{
 	padding-top:.5em;
 	padding-bottom: .5em;
-}
-ul.nav img{
-	border-radius:7px;
-	background-color: white;
+	opacity: 1;
 }
 
 ul.nav span{
@@ -76,8 +76,9 @@ ul.nav span{
 	display:block;
 	border: 3px solid black;
 	border-radius: 7px;
-	background-color: orange;
+	background-color: yellow;
 	cursor: pointer;
+	opacity: 1;
 }
 ul.nav li.active span{
 	background-color:green;
@@ -99,5 +100,9 @@ span.explain{
 
 	font-family: 'Open Sans', sans-serif;
 	font-size: 2em;
+	z-index: 2;
 }
+/*.dynamic{
+	opacity:0;
+}/*start completely transparent*/
 

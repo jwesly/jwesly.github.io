@@ -16,11 +16,11 @@ ENV.maxY = $(window).height()-ENV.buffer;
 ENV.speed = 1.5;
 ENV.minRandDot = 10;
 ENV.maxRandDot = 30;
-ENV.spawnConstant = 1000;//higher constant, less spawns
+ENV.spawnConstant = 750;//higher constant, less spawns
 ENV.eatableRatio = .75;//
 ENV.directionChangeProb = .01;
-ENV.freakExplosionDiameter = 75;//min diameter for random explosions
-ENV.explosionConstant = 10000;//higher constant more explosions
+ENV.freakExplosionDiameter = 100;//min diameter for random explosions
+ENV.explosionConstant = 50000;//higher constant less explosions
 ENV.maxDiameter = 400;//if you get this high, you die
 
 ENV.eatDiameterMultiplier = .9;//how much of the dinner's diameter is added to the diner

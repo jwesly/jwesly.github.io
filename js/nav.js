@@ -1,15 +1,13 @@
 /*****************************************************
 TODO List
-
-Better js organization
-
-Pictures/Informatiopn about my Projects
-
-Better Icons for Links
-	-Github
-	-LinkedIn
-	-Email
-	-Twitter?
+	Better Icons for Links
+		-Github(DONE)
+		-LinkedIn(DONE)
+		-Email(DONE)
+		-Twitter?
+	Arrow Key Navigation
+	Pictures/Information about my Projects
+	Better JS organization
 
 *****************************************************/
 $(document).ready(function(){
@@ -111,16 +109,33 @@ var changeSection = function(target){
 
 changeSection(0);
 
+var nextSlide = function(){
+	var target = ($("ul.nav li.active").data("position")+1)%sections;
+	changeSection(target);
+}
+var prevSlide = function(){
+	var target = (($("ul.nav li.active").data("position")-1)%sections+sections)%sections;
+	changeSection(target);
+}
 document.body.addEventListener("wheel",function(event){
-	if(event.deltaY>0||event.deltaX>0){
-		var target = ($("ul.nav li.active").data("position")+1)%sections;
-		changeSection(target);
-	}
-	else if(event.deltaY<0||event.deltaX<0){
-		var target = (($("ul.nav li.active").data("position")-1)%sections+sections)%sections;
-		changeSection(target);
-	}
+	if(event.deltaY>0||event.deltaX>0)
+		nextSlide();
+	else if(event.deltaY<0||event.deltaX<0)
+		prevSlide();
 });
+
+var checkKey = function(e){
+	e = e || window.event;
+	e = e.keyCode;
+	if(e==37||e==38){
+		prevSlide();
+	}
+	else if(e==39||e==40){
+		nextSlide();
+	}
+}
+
+document.onkeydown = checkKey;
 
 
 });//end document ready

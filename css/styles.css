@@ -1,6 +1,7 @@
 body{
 	margin:0;
 	z-index: 1;
+	color:white;
 }
 nav{
 	position: fixed;
@@ -10,47 +11,45 @@ nav{
 	z-index: 9999;
 	height: 12%;
 	background-color: #00a087;
-}/*top of section container MUST equal height of nav*/
+}/*nav + section MUST = 100*/
+
+.my-name{
+	font-size:7vh;/* 7% of height*/
+	font-family: 'Orbitron', sans-serif;
+	padding-left: 1em;
+	vertical-align: middle;
+}
+
 .section-container{
 	position:absolute;
 	height:88%;
 	width:100%;
 	bottom:0em;
 }
-
-nav span,nav img{
-	display:inline;
-	position:absolute;
+nav > span{
 	top:50%;
 	transform: translateY(-50%);
 }
-nav img{
+
+nav > a{
+	display:inline;
 	position: relative;
 	float: right;
-	padding-right: 2em;
+	padding:1vw;
+	margin-right: 2vw;
+	top:50%;
+	transform: translateY(-50%);
+	height:7vh;
+	width:7vh;
 }
-.my-name{
-	font-size:7vh;/* 7% of height*/
-	font-family: 'Orbitron', sans-serif;
-	padding-left: 1em;
-	color:white;
-	vertical-align: middle;
-}
+
+
 
 
 
 section{
 	background-color: black;
 	height:100%;
-}
-section div.section_title{
-	font-family: 'Alfa Slab One', cursive;
-	font-size:2em;
-	text-align:center;
-	width:50%;
-	margin:auto;
-	color:yellow;
-	z-index: 1;
 }
 
 ul.nav{
@@ -102,7 +101,4 @@ span.explain{
 	font-size: 2em;
 	z-index: 2;
 }
-/*.dynamic{
-	opacity:0;
-}/*start completely transparent*/
 

@@ -1,5 +1,17 @@
+/*****************************************************
+TODO List
 
+Better js organization
 
+Pictures/Informatiopn about my Projects
+
+Better Icons for Links
+	-Github
+	-LinkedIn
+	-Email
+	-Twitter?
+
+*****************************************************/
 $(document).ready(function(){
 
 var wordFrame = function(statics,dynamics,times){
@@ -64,11 +76,9 @@ var animateSection = function(target){
 		})
 	};
 	newFade(0);
-
-	var world = new dotWorld($(sel));
-	for(i=0;i<6;i++){
-		world.addDot();
-	}
+	if(target==0||target==1)
+		var world = new dotWorld($(sel));
+	
 
 }
 

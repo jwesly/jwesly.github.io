@@ -2,19 +2,21 @@ doctype html
 html(lang="en")
   head
     title Jabez Wesly
+    meta(http-equiv="Cache-control", content="no-cache")
+    meta(http-equiv="Expires" content="-1")
     link(rel='stylesheet',type='text/css',href='css/styles.css')
     link(href='http://fonts.googleapis.com/css?family=Orbitron:500',rel='stylesheet',type='text/css')
     link(href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css')
   body
     nav.fixed-bar
-      span.my-name Jabez Wesly: WIP
+      span.my-name Jabez Wesly
       a(href='https://github.com/jwesly',target="_blank",title="Star Me on Github")
         img(src="img/github.svg")
       a(href='https://www.linkedin.com/pub/jabez-wesly/a0/181/b25',target="_blank",title="Connect with Me  on LinkedIn")
         img(src="img/linkedin.svg")
       a(href="mailto:wjabezkingsly@gmail.com",target="_blank",title="Email Me")
         img(src="img/email.svg")
-    div.section-container
+    div#section-container
       section#0
         div.explain
           span.explain
@@ -32,5 +34,8 @@ html(lang="en")
             span.dynamic
       ul.nav
       script(src="js/jquery-1.11.0.js")
+      script(src="js/jquery.touchSwipe.min.js")
+      script(src="js/hammer.min.js")
+      script(src="js/jquery.hammer.js")
       script(src="js/dots.js")
       script(src="js/nav.js")

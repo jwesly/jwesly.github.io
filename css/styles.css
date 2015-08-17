@@ -9,18 +9,20 @@ nav{
 	left: 0;
 	width: 100%;
 	z-index: 9999;
-	height: 12%;
+	height: 12vh;
 	background-color: #00a087;
 }/*nav + section MUST = 100*/
 
 .my-name{
-	font-size:7vh;/* 7% of height*/
+	position:absolute;
+	line-height:12vh;
+	font-size:6vh;/* 7% of height*/
 	font-family: 'Orbitron', sans-serif;
 	padding-left: 1em;
 	vertical-align: middle;
 }
 
-.section-container{
+#section-container{
 	position:absolute;
 	height:88%;
 	width:100%;
@@ -43,38 +45,33 @@ nav > a{
 	width:7vh;
 }
 
-
-
-
-
 section{
 	background-color: black;
 	height:100%;
 }
 
 ul.nav{
-	position: absolute;
-	top:50%;
-	transform:translateY(-50%);
-	right: 2em;
+	position: relative;
+	width:14vw;
+	bottom:8vw;
 	list-style: none;
 	background-color: #232323;
-	padding: 1em;
+	padding: 1vw 1vw 1vw 1vw;
+	margin:auto;
 	border-radius: 10px;
 	opacity: .9;
 }
 ul.nav li{
-	padding-top:.5em;
-	padding-bottom: .5em;
-	opacity: 1;
+	display:inline-block;
+	margin-left:1vw;
 }
 
 ul.nav span{
-	height:2em;
-	width:2em;
-	display:block;
-	border: 3px solid black;
-	border-radius: 7px;
+	height:3vw;
+	width:3vw;
+	display:inline-block;
+	border: .25vw solid black;
+	border-radius: .6vw;
 	background-color: yellow;
 	cursor: pointer;
 	opacity: 1;
@@ -96,7 +93,6 @@ div.explain{
 span.explain{
 	position:absolute;
 	left:8vw;
-
 	font-family: 'Open Sans', sans-serif;
 	font-size: 2em;
 	z-index: 2;

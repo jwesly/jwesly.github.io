@@ -76,14 +76,12 @@ var animateSection = function(target){
 	newFade(0);
 	if(target==0||target==1)
 		var world = new dotWorld($(sel));
-	
-
 }
 
 
 
 
-var sections = $(".section-container section").size();
+var sections = $("#section-container section").size();
 
 for(i=0;i<sections;i++){
 	var item = $("<li></li>").data("position",i).click(function(){
@@ -96,16 +94,34 @@ var changeSection = function(target){
 	$(".magicDot").remove();
 	for(var i=0;i<sections;i++){
 		if(i==target){
-			$(".section-container section").eq(i).css("display","block");
+			$("#section-container section").eq(i).css("display","block");
 			$("ul.nav li").eq(i).addClass("active");
 		}
 		else{
-			$(".section-container section").eq(i).css("display","none");
+			$("#section-container section").eq(i).css("display","none");
 			$("ul.nav li").eq(i).removeClass("active");
 		}
 	}
 	animateSection(target);
 }
+
+	var scontain = document.getElementById("section-container");
+
+	Hammer(scontain).on("swipeleft",function(){
+		nextSlide();
+	});
+
+	Hammer(scontain).on("swiperight",function(){
+		prevSlide();
+	});
+
+	Hammer(scontain).on("swipedown",function(){
+		nextSlide();
+	});
+
+	Hammer(scontain).on("swipeup",function(){
+		prevSlide();
+	});
 
 changeSection(0);
 
@@ -123,6 +139,9 @@ document.body.addEventListener("wheel",function(event){
 	else if(event.deltaY<0||event.deltaX<0)
 		prevSlide();
 });
+
+
+
 
 var checkKey = function(e){
 	e = e || window.event;

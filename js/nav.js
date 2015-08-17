@@ -1,12 +1,7 @@
 /*****************************************************
 TODO List
-	Better Icons for Links
-		-Github(DONE)
-		-LinkedIn(DONE)
-		-Email(DONE)
-		-Twitter?
-	Arrow Key Navigation
 	Pictures/Information about my Projects
+	Better Mobile Site
 	Better JS organization
 
 *****************************************************/

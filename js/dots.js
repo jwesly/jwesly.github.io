@@ -57,7 +57,7 @@ var Dot = function(diameter,color,id,world,startX,startY){
 		"position":"fixed",
 		"left":px(startX),
 		"top":px(startY),
-		"z-index":"0",
+		"z-index":"11",
 		"background-color":color,
 		"color":"yellow",
 		"font-size":"2em"

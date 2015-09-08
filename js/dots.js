@@ -26,7 +26,7 @@ ENV.maxDiameter = 400;//if you get this high, you die
 ENV.eatDiameterMultiplier = .9;//how much of the dinner's diameter is added to the diner
 
 ENV.explosionSpawnChildren = 3;//how many children spawn when you explode
-ENV.explosionSpawnChildRatio = .25;//ratio of new diameter to original diameter
+ENV.explosionSpawnChildRatio = .4;//ratio of new diameter to original diameter
 
 var DEBUG = {};
 DEBUG.watchNextDot;
@@ -43,7 +43,7 @@ var unpx = function(str){
 
 
 
-var colors = ["#3498db","#2ecc71","#1abc9c","#f1c40f","#ff0066","#93E617"];
+var colors = ["#3498db","#2ecc71","#1abc9c","#f1c40f","#ff0066","#93E617","#00EE00","#00E5EE","#1464F4","#32CD32","#33FF33","#912CEE","#37FDFC","#5DFC0A","#660198","#76EE00"];
 
 var Dot = function(diameter,color,id,world,startX,startY){
 	this.diameter = diameter;
@@ -57,7 +57,7 @@ var Dot = function(diameter,color,id,world,startX,startY){
 		"position":"fixed",
 		"left":px(startX),
 		"top":px(startY),
-		"z-index":"11",
+		"z-index":"1",
 		"background-color":color,
 		"color":"yellow",
 		"font-size":"2em"

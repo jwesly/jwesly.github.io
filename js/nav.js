@@ -1,11 +1,61 @@
 /*****************************************************
+NONE OF THE DOT WORLDS DIE!!!!!!
+
 TODO List
 	Pictures/Information about my Projects
 	Better Mobile Site
 	Better JS organization
 
 *****************************************************/
+
+// http://paulirish.com/2011/requestanimationframe-for-smart-animating/
+// http://my.opera.com/emoller/blog/2011/12/20/requestanimationframe-for-smart-er-animating
+ 
+// requestAnimationFrame polyfill by Erik Möller
+// fixes from Paul Irish and Tino Zijdel
+ 
+(function() {
+    var lastTime = 0;
+    var vendors = ['ms', 'moz', 'webkit', 'o'];
+    for(var x = 0; x < vendors.length && !window.requestAnimationFrame; ++x) {
+        window.requestAnimationFrame = window[vendors[x]+'RequestAnimationFrame'];
+        window.cancelAnimationFrame = window[vendors[x]+'CancelAnimationFrame']
+                                   || window[vendors[x]+'CancelRequestAnimationFrame'];
+    }
+ 
+    if (!window.requestAnimationFrame)
+        window.requestAnimationFrame = function(callback, element) {
+            var currTime = new Date().getTime();
+            var timeToCall = Math.max(0, 16 - (currTime - lastTime));
+            var id = window.setTimeout(function() { callback(currTime + timeToCall); },
+              timeToCall);
+            lastTime = currTime + timeToCall;
+            return id;
+        };
+ 
+    if (!window.cancelAnimationFrame)
+        window.cancelAnimationFrame = function(id) {
+            clearTimeout(id);
+        };
+}());
+
+//my code starts
+
+var currentDotWorld = {};
+var worldCounter = 0;
 $(document).ready(function(){
+
+
+$(window).resize(function(){
+	var thisSlide = $("ul.nav li.active").data("position");
+	if(thisSlide == 0 || thisSlide == 1){
+		currentDotWorld.selfDestruct();
+		calcENV();
+		var sel = "#"+String(thisSlide);
+		currentDotWorld = new dotWorld($(sel),worldCounter);
+		worldCounter++;
+	}
+});
 
 var wordFrame = function(statics,dynamics,times){
 	this.statics = statics;
@@ -32,9 +82,12 @@ messagez.push([new wordFrame("","What Do I Do?",startTimez)
 ]);
 
 messagez.push([new wordFrame("","What Have I Done?",[0,750,750])
-	,new wordFrame("","Take a Look",endTimez)
+	,new wordFrame("","Take a Look",[750,750,3000])
+	,new wordFrame(""," ",endTimez)
 ]);
-
+/**
+Called EACH time when slide is changed
+**/
 
 var animateSection = function(target){
 
@@ -69,8 +122,14 @@ var animateSection = function(target){
 		})
 	};
 	newFade(0);
-	if(target==0||target==1)
-		var world = new dotWorld($(sel));
+	console.log(currentDotWorld.hasOwnProperty("slide"));
+	if(currentDotWorld.hasOwnProperty("slide")){
+		currentDotWorld.selfDestruct();
+	}
+	if(target==0||target==1){
+		currentDotWorld = new dotWorld($(sel),worldCounter);
+		worldCounter++;
+	}
 }
 
 
@@ -121,12 +180,16 @@ var changeSection = function(target){
 changeSection(0);
 
 var nextSlide = function(){
-	var target = ($("ul.nav li.active").data("position")+1)%sections;
-	changeSection(target);
+	var thisSlide = $("ul.nav li.active").data("position");
+	if(thisSlide+1>=sections)//don't change if last slide
+		return;
+	changeSection(thisSlide+1);
 }
 var prevSlide = function(){
-	var target = (($("ul.nav li.active").data("position")-1)%sections+sections)%sections;
-	changeSection(target);
+	var thisSlide = $("ul.nav li.active").data("position");
+	if(thisSlide-1<0)
+		return;
+	changeSection(thisSlide-1);
 }
 document.body.addEventListener("wheel",function(event){
 	if(event.deltaY>0||event.deltaX>0)

@@ -5,28 +5,64 @@ Created 8/12/15
 Last Updated 8/15/15
 *********************************************************************************************/
 
-var ENV = {};//
-ENV.initialDots = 8;
+/*********************************************************************************************
+KNOWN ISSUES
+	High memory usage
+		kill world on tab change (Accomplished)
+		plug memory leaks (if they exist) [turns out it was because of the worlds not dying]
+	Huge self-sustaining explosions (likely fixed by screen dependent ENV variables)
+	Too many dots as simulation continues to run (probably because of worlds not dying and being laid over each other.
+	 further fixed by spawn rate becoming a function of live dots)
+	Restart Simulation on Screen Resize
+
+
+
+************************************************************************************************/
+
+var RUNTIME = {};//carries global variables that change at runtime
+
+RUNTIME.liveDots;
+//all variables dependent on screen recalced here
+
+var ENV = {};//contains (mostly) static global variables that affect the Dot ecosystem
+
+var calcENV = function(){
+ENV.screenHeight = $(window).height();
+ENV.screenWidth = $(window).width()
+ENV.screenArea = ENV.screenHeight*ENV.screenWidth;
+
+ENV.initialDots = ENV.screenArea/100000;
+ENV.maxDots = 15;//impacts performance. stops new spawns
+//Needs to be function of screen size
 
 ENV.buffer = 25;
 ENV.minX = ENV.buffer;
-ENV.maxX = $(window).width()-ENV.buffer;
-ENV.minY = $(window).height()*.12 + ENV.buffer;//accounts for nav bar
-ENV.maxY = $(window).height()-ENV.buffer;
+ENV.maxX = ENV.screenWidth-ENV.buffer;
+ENV.minY = ENV.screenHeight*.12 + ENV.buffer;//accounts for nav bar
+ENV.maxY = ENV.screenHeight-ENV.buffer;
 ENV.speed = 1.5;
-ENV.minRandDot = 10;
-ENV.maxRandDot = 30;
-ENV.spawnConstant = 750;//higher constant, less spawns
+
+ENV.minRandDot = Math.min(ENV.screenHeight,ENV.screenWidth)*.02;
+ENV.maxRandDot = ENV.minRandDot*2;
+//function of screen size
+
+ENV.spawnConstant = 100;//higher constant, less spawns
+ENV.liveDotExponent = 1.2;//as more dots appear on screen, spawn rate decreases exppnentially
+//Needs to be a function of dots on screen
+
 ENV.eatableRatio = .75;//
 ENV.directionChangeProb = .01;
 ENV.freakExplosionDiameter = 75;//min diameter for random explosions
-ENV.explosionConstant = 3000;//higher constant less explosions
-ENV.maxDiameter = 400;//if you get this high, you die
+ENV.explosionConstant = 3500;//higher constant less explosions
+ENV.maxDiameter = Math.min(ENV.screenHeight,ENV.screenWidth)*.5;//if you get this high, you die
+//Needs to be a function of screen size
 
 ENV.eatDiameterMultiplier = .9;//how much of the dinner's diameter is added to the diner
 
 ENV.explosionSpawnChildren = 3;//how many children spawn when you explode
-ENV.explosionSpawnChildRatio = .4;//ratio of new diameter to original diameter
+ENV.explosionSpawnChildRatio = .35;//ratio of new diameter to original diameter
+}
+calcENV();
 
 var DEBUG = {};
 DEBUG.watchNextDot;
@@ -57,7 +93,7 @@ var Dot = function(diameter,color,id,world,startX,startY){
 		"position":"fixed",
 		"left":px(startX),
 		"top":px(startY),
-		"z-index":"1",
+		"z-index":"0",
 		"background-color":color,
 		"color":"yellow",
 		"font-size":"2em"
@@ -85,9 +121,12 @@ Dot.prototype.animate = function() {
 		var nID = Number(that.id.split("magicDot")[1]);
 		if(!that.world.isAlive(that.id)){
 			window.cancelAnimationFrame(that.requestID);
+			that.world.removeDot(that.id);
 			return;//self-destruct
 		}		
-
+		if(that.world.worldCount != worldCounter-1){
+			console.log("We have leakage!!!!");
+		}
 		if(Math.floor(Math.random()/ENV.directionChangeProb)==0){
 			that.newDirection();
 		}
@@ -212,10 +251,12 @@ Dot.prototype.animate = function() {
 	this.requestID = window.requestAnimationFrame(eachFrame);
 };
 
-var dotWorld = function(slide){
+var dotWorld = function(slide,wcount){
 	this.dotNum = 0;//used solely for creating new ID's. not necessarily # of dots
 	this.slide = slide;
 	this.dots = [];
+	this.worldCount = wcount;
+
 	for(var i=0;i<ENV.initialDots;i++){
 		this.addDot();
 	}
@@ -223,14 +264,32 @@ var dotWorld = function(slide){
 	var randSpawn = function(){
 		if(DEBUG.pause)
 			return;
-		if(Math.floor(Math.random()*ENV.spawnConstant)==0){
+		if(RUNTIME.liveDots>=ENV.maxDots)//no new thangs (spawns)
+			return;
+		//console.log(ENV.spawnConstant*Math.pow(RUNTIME.liveDots,ENV.liveDotExponent));
+		if(Math.floor(Math.random()*ENV.spawnConstant*Math.pow(RUNTIME.liveDots,ENV.liveDotExponent))==0){
 			//console.log("new spawn");
+			console.log("new spawn on world ",that.worldCount);
 			that.addDot();
+			
 		}
-		window.requestAnimationFrame(randSpawn);
+		that.randSpawnAnimation = window.requestAnimationFrame(randSpawn);
 	}
-	window.requestAnimationFrame(randSpawn);
+	this.randSpawnAnimation = window.requestAnimationFrame(randSpawn);
 };
+
+dotWorld.prototype.selfDestruct = function(){
+	window.cancelAnimationFrame(this.randSpawnAnimation);
+	this.dots = [];
+	console.log("Destroying world",this.worldCount);
+	this.liveDotsUpdate();
+}
+
+dotWorld.prototype.liveDotsUpdate = function(){
+	RUNTIME.liveDots = this.dots.length;
+	console.log(RUNTIME.liveDots," in world ",this.worldCount);
+	return this.dots.length;
+}
 
 dotWorld.prototype.addDot = function(startX,startY,diameter,dynamic){
 	if(DEBUG.watchNextDot){
@@ -258,6 +317,7 @@ dotWorld.prototype.addDot = function(startX,startY,diameter,dynamic){
 			dot.animate();
 	}
 	this.dotNum++;
+	this.liveDotsUpdate();
 	return;
 };
 
@@ -324,7 +384,8 @@ dotWorld.prototype.removeDot = function(id){
 		if(this.dots[i].id==id){
 			this.dots.splice(i,1);
 			$("#magicDot"+String(id)).remove();
-			console.log(id+" is dead");
+			//console.log(id+" is dead");
+			this.liveDotsUpdate();
 			return true;
 		}
 	}

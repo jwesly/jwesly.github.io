@@ -41,6 +41,16 @@ TODO List
 
 //my code starts
 
+var projectsFadeIn = function(){
+	var ftime = 750;
+	$(".proj2").animate({opacity: 1},ftime,function(){
+		$(".proj0").animate({opacity: 1},ftime,function(){
+			$(".proj1").animate({opacity: 1},ftime)
+		})
+	})
+	//$(".projects > div").css("opacity","1");
+}
+
 var currentDotWorld = {};
 var worldCounter = 0;
 $(document).ready(function(){
@@ -81,8 +91,8 @@ messagez.push([new wordFrame("","What Do I Do?",startTimez)
 	,new wordFrame("I ","create",endTimez)
 ]);
 
-messagez.push([new wordFrame("","What Have I Done?",[0,750,750])
-	,new wordFrame("","Take a Look",[750,750,3000])
+messagez.push([new wordFrame("","What Have I Done?",[0,600,600])
+	,new wordFrame("","Take a Look",[600,600,500])
 	,new wordFrame(""," ",endTimez)
 ]);
 /**
@@ -95,7 +105,6 @@ var animateSection = function(target){
 	var dynsel = $(sel+" .dynamic");
 	var statsel = $(sel+" .static");
 	var frames = messagez[target];
-
 	var newFade = function(iter){
 		statsel.html(frames[iter].statics);
 		if($(sel).css("display")=="none"){//if user has moved to next slide
@@ -104,8 +113,11 @@ var animateSection = function(target){
 		}
 		dynsel.html(frames[iter].dynamics);
 		dynsel.fadeIn(frames[iter].times[0],"swing",function(){
-			if(frames[iter].times[1]==-1)
+			if(frames[iter].times[1]==-1){
+				if(target==2)
+					projectsFadeIn();
 				return true;
+			}
 			if($(sel).css("display")=="none"){//if user has moved to next slide
 				dynsel.html(frames[0].dynamics);
 				return true;
@@ -121,7 +133,10 @@ var animateSection = function(target){
 			},frames[iter].times[1]);
 		})
 	};
-	newFade(0);
+	var xz = ($(".proj1").css("opacity"));
+	console.log(xz);
+	if(!(target==2&& $(".proj1").css("opacity") == 1))
+		newFade(0);
 	console.log(currentDotWorld.hasOwnProperty("slide"));
 	if(currentDotWorld.hasOwnProperty("slide")){
 		currentDotWorld.selfDestruct();

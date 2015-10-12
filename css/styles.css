@@ -147,7 +147,7 @@ span.explain{
 	display: table-cell;*/
 	bottom: 0;
 	position:absolute;
-	z-index: -1;
+	z-index: 0;
 }
 
 .projDescription{
@@ -155,6 +155,7 @@ span.explain{
 	top:1vh;
 	padding-left:2vw;
 	padding:right:2vw;
+	z-index: .5;
 }
 
 .projTitle{

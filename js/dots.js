@@ -105,6 +105,16 @@ var Dot = function(diameter,color,id,world,startX,startY){
 	this.directionX = 0;
 	this.directionY = 0;
 	this.newDirection();
+	this.cleft;
+	this.ctop;
+	this.radius;
+
+	this.updatePosition = function(cleft,ctop,radius){
+		this.cleft  = cleft;
+		this.ctop   = ctop;
+		this.radius = radius;
+	}
+
 
 	world.slide.append(this.domElement);
 }
@@ -124,7 +134,6 @@ Dot.prototype.animate = function() {
 
 		var nID = Number(that.id.split("magicDot")[1]);
 		if(!that.world.isAlive(that.id)){
-			window.cancelAnimationFrame(that.requestID);
 			that.world.removeDot(that.id);
 			return;//self-destruct
 		}		
@@ -168,12 +177,10 @@ Dot.prototype.animate = function() {
 				//destroy old dot
 				var x = Number(that.id.split("magicDot")[1]);
 				that.world.removeDot(x);
-				window.cancelAnimationFrame(that.requestID);
 				return true;//self-destruct
 			};
 		if(that.diameter>ENV.freakExplosionDiameter && Math.floor(Math.random()*(ENV.explosionConstant/that.diameter))==0 || that.diameter > ENV.maxDiameter){
 			if(explode()){
-				window.cancelAnimationFrame(that.requestID);
 				return;
 			}
 		}
@@ -202,7 +209,6 @@ Dot.prototype.animate = function() {
 				console.log(that.id+" iter>1000 "+String(cleft)+" "+String(ctop)+" "+String(radius));
 				if(iteri==1005)
 					if(explode()){
-						window.cancelAnimationFrame(that.requestID);
 						return;
 					}
 				//return;
@@ -233,15 +239,17 @@ Dot.prototype.animate = function() {
 				ctop = ENV.minY+radius;
 			if(ctop+radius>ENV.maxY)
 				ctop = ENV.maxY-radius;
-			that.world.removeDot(eat.id);
+			//console.log(eat.id);
+			that.world.removeDot(Number(eat.id.split("magicDot")[1]));
 			left = cleft-radius;
 			top = ctop-radius;
 		}
-		if(!that.world.updatePosition(that.id,cleft,ctop,radius)){
-			window.cancelAnimationFrame(that.requestID);
+		that.updatePosition(cleft,ctop,radius)
+		/*if(!that.world.updatePosition(that.id,cleft,ctop,radius)){
+			//window.cancelAnimationFrame(that.requestID);
 			return;//self-destruct
 		};//if they couldn't find you, you're dead
-
+		*/
 
 		that.domElement.css("left",px(left)).css("top",px(top));
 		$("#"+that.id).remove();
@@ -296,6 +304,10 @@ var dotWorld = function(slide,wcount){
 dotWorld.prototype.selfDestruct = function(){
 	window.cancelAnimationFrame(this.worldAnimation);
 	this.dots = [];
+	for(var i=0;i<this.dotObj.length;i++){
+		this.removeDot(Number(this.dotObj[i].id.split("magicDot")[1]));
+	}
+	$(".magicDot").remove();
 	console.log("Destroying world",this.worldCount);
 	this.liveDotsUpdate();
 }
@@ -329,10 +341,7 @@ dotWorld.prototype.addDot = function(startX,startY,diameter,dynamic){
 		,"left":0
 		,"radius":0
 	})));
-	if(this.updatePosition(id,startX,startY,radius)){
-		if(dynamic)
-			dot.animate();
-	}
+	dot.updatePosition();
 	this.dotNum++;
 	this.liveDotsUpdate();
 	return dot;
@@ -354,6 +363,8 @@ dotWorld.prototype.isAlive = function(id){
 
 
 dotWorld.prototype.updatePosition = function(id,cleft,ctop,radius){
+	console.log("still getting stuff here");
+	return false;
 	id = Number(id.split("magicDot")[1]);
 	for(var i=0;i<this.dots.length;i++){
 		if(this.dots[i].id == id){
@@ -373,32 +384,38 @@ dotWorld.prototype.updatePosition = function(id,cleft,ctop,radius){
 dotWorld.prototype.getEatableDot = function(id,cleft,ctop,radius){//change to radius
 	id = Number(id.split("magicDot")[1]);
 	var eatables = [];
-	for(var i=0;i<this.dots.length;i++){
-		if(this.dots[i].id!=id&&this.dots[i].left>cleft-radius&&this.dots[i].left<cleft+radius&&this.dots[i].top>ctop-radius&&this.dots[i].top<ctop+radius){
-			var distance = Math.sqrt(Math.pow(this.dots[i].left-cleft,2)+Math.pow(this.dots[i].top-ctop,2));
+	for(var i=0;i<this.dotObj.length;i++){
+		var tdot = this.dotObj[i];
+		if(tdot.id!=id&&tdot.cleft>cleft-radius&&tdot.cleft<cleft+radius&&tdot.ctop>ctop-radius&&tdot.ctop<ctop+radius){
+			var distance = Math.sqrt(Math.pow(tdot.cleft-cleft,2)+Math.pow(tdot.ctop-ctop,2));
 			//console.log(distance,radius,radius*.75,this.dots[i].radius);
-			if((distance)<radius && this.dots[i].radius<radius*ENV.eatableRatio){
-				eatables.push(this.dots[i]);//return dot to be eaten
+			if((distance)<radius && tdot.radius<radius*ENV.eatableRatio){
+				eatables.push(tdot);//return dot to be eaten
 			}
 		}
 	}
-	var sd = 999999999;
-	var si;
+	if(eatables.length < 1)
+		return false;
+	//console.log(eatables);
+	var sd = 999999999999999999;
+	var sd, si;
 	for(var i=0;i<eatables.length;i++){
-		var distance = Math.sqrt(Math.pow(eatables[i].left-cleft,2)+Math.pow(eatables[i].top-ctop,2));
+		var distance = Math.sqrt(Math.pow(eatables[i].cleft-cleft,2)+Math.pow(eatables[i].ctop-ctop,2));
+		//console.log("this is ",distance,sd);
 		if(distance<sd){
 			sd = distance;
 			si = i;
 		}
 	}
-	if(sd == 999999999)
+	if(typeof eatables[si] === 'undefined')
 		return false;
 	return eatables[si];
 }
 
 dotWorld.prototype.removeDot = function(id){
+	console.log(id);
 	for(var i =0; i < this.dotObj.length; i++){
-		if(this.dotObj[i].id == id)
+		if(Number(this.dotObj[i].id.split("magicDot")[1]) == id)
 			this.dotObj.splice(i,1);
 	}
 	for(var i=0;i<this.dots.length;i++){

@@ -2,11 +2,11 @@
 Created by Jabez Wesly
 
 Created 8/12/15
-Last Updated 8/15/15
+Last Updated 12/25/15
 *********************************************************************************************/
 
 /*********************************************************************************************
-KNOWN ISSUES
+KNOWN ISSUES(8/15/15)
 	High memory usage
 		kill world on tab change (Accomplished)
 		plug memory leaks (if they exist) [turns out it was because of the worlds not dying]
@@ -14,6 +14,10 @@ KNOWN ISSUES
 	Too many dots as simulation continues to run (probably because of worlds not dying and being laid over each other.
 	 further fixed by spawn rate becoming a function of live dots)
 	Restart Simulation on Screen Resize
+
+BIG ISSUE(12/25/15)
+	window.requestAnimationFrame should only have one thread per window
+	Requires a rewrite of entire thing
 
 
 

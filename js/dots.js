@@ -31,40 +31,40 @@ RUNTIME.liveDots;
 var ENV = {};//contains (mostly) static global variables that affect the Dot ecosystem
 
 var calcENV = function(){
-ENV.screenHeight = $(window).height();
-ENV.screenWidth = $(window).width()
-ENV.screenArea = ENV.screenHeight*ENV.screenWidth;
+	ENV.screenHeight = $(window).height();
+	ENV.screenWidth = $(window).width()
+	ENV.screenArea = ENV.screenHeight*ENV.screenWidth;
 
-ENV.initialDots = ENV.screenArea/100000;
-ENV.maxDots = 15;//impacts performance. stops new spawns
-//Needs to be function of screen size
+	ENV.initialDots = ENV.screenArea/100000;
+	ENV.maxDots = 15;//impacts performance. stops new spawns
+	//Needs to be function of screen size
 
-ENV.buffer = 25;
-ENV.minX = ENV.buffer;
-ENV.maxX = ENV.screenWidth-ENV.buffer;
-ENV.minY = ENV.screenHeight*.12 + ENV.buffer;//accounts for nav bar
-ENV.maxY = ENV.screenHeight-ENV.buffer;
-ENV.speed = 1.5;
+	ENV.buffer = 25;
+	ENV.minX = ENV.buffer;
+	ENV.maxX = ENV.screenWidth-ENV.buffer;
+	ENV.minY = ENV.screenHeight*.12 + ENV.buffer;//accounts for nav bar
+	ENV.maxY = ENV.screenHeight-ENV.buffer;
+	ENV.speed = 1.5;
 
-ENV.minRandDot = Math.min(ENV.screenHeight,ENV.screenWidth)*.02;
-ENV.maxRandDot = ENV.minRandDot*2;
-//function of screen size
+	ENV.minRandDot = Math.min(ENV.screenHeight,ENV.screenWidth)*.02;
+	ENV.maxRandDot = ENV.minRandDot*2;
+	//function of screen size
 
-ENV.spawnConstant = 100;//higher constant, less spawns
-ENV.liveDotExponent = 1.2;//as more dots appear on screen, spawn rate decreases exppnentially
-//Needs to be a function of dots on screen
+	ENV.spawnConstant = 100;//higher constant, less spawns
+	ENV.liveDotExponent = 1.2;//as more dots appear on screen, spawn rate decreases exppnentially
+	//Needs to be a function of dots on screen
 
-ENV.eatableRatio = .75;//
-ENV.directionChangeProb = .01;
-ENV.freakExplosionDiameter = 75;//min diameter for random explosions
-ENV.explosionConstant = 3500;//higher constant less explosions
-ENV.maxDiameter = Math.min(ENV.screenHeight,ENV.screenWidth)*.5;//if you get this high, you die
-//Needs to be a function of screen size
+	ENV.eatableRatio = .75;//
+	ENV.directionChangeProb = .01;
+	ENV.freakExplosionDiameter = 75;//min diameter for random explosions
+	ENV.explosionConstant = 3500;//higher constant less explosions
+	ENV.maxDiameter = Math.min(ENV.screenHeight,ENV.screenWidth)*.5;//if you get this high, you die
+	//Needs to be a function of screen size
 
-ENV.eatDiameterMultiplier = .9;//how much of the dinner's diameter is added to the diner
+	ENV.eatDiameterMultiplier = .9;//how much of the dinner's diameter is added to the diner
 
-ENV.explosionSpawnChildren = 3;//how many children spawn when you explode
-ENV.explosionSpawnChildRatio = .35;//ratio of new diameter to original diameter
+	ENV.explosionSpawnChildren = 3;//how many children spawn when you explode
+	ENV.explosionSpawnChildRatio = .35;//ratio of new diameter to original diameter
 }
 calcENV();
 
@@ -247,18 +247,20 @@ Dot.prototype.animate = function() {
 		$("#"+that.id).remove();
 		
 		that.world.slide.append(that.domElement);
-		that.animate();
+		//that.animate();
 
 	};//new motion
 
+	eachFrame();//just for a little bit
 
-	this.requestID = window.requestAnimationFrame(eachFrame);
+	//this.requestID = window.requestAnimationFrame(eachFrame);
 };
 
 var dotWorld = function(slide,wcount){
 	this.dotNum = 0;//used solely for creating new ID's. not necessarily # of dots
 	this.slide = slide;
-	this.dots = [];
+	this.dots = [];//legacy array of just the radius position and id's
+	this.dotObj = [];//new array of the actual dot objects
 	this.worldCount = wcount;
 
 	for(var i=0;i<ENV.initialDots;i++){
@@ -277,18 +279,27 @@ var dotWorld = function(slide,wcount){
 			that.addDot();
 			
 		}
-		that.randSpawnAnimation = window.requestAnimationFrame(randSpawn);
+		
 	}
-	this.randSpawnAnimation = window.requestAnimationFrame(randSpawn);
+	
+	//Everything should be called from in this next function
+	var mainThread = function(){
+		randSpawn();
+		for(var i = 0; i < that.dotObj.length; i++){
+			that.dotObj[i].animate();
+		}
+		that.worldAnimation = window.requestAnimationFrame(mainThread);
+	}
+	this.worldAnimation = window.requestAnimationFrame(mainThread);
 };
 
 dotWorld.prototype.selfDestruct = function(){
-	window.cancelAnimationFrame(this.randSpawnAnimation);
+	window.cancelAnimationFrame(this.worldAnimation);
 	this.dots = [];
 	console.log("Destroying world",this.worldCount);
 	this.liveDotsUpdate();
 }
-
+//console logs how many dots there are
 dotWorld.prototype.liveDotsUpdate = function(){
 	RUNTIME.liveDots = this.dots.length;
 	console.log(RUNTIME.liveDots," in world ",this.worldCount);
@@ -310,6 +321,8 @@ dotWorld.prototype.addDot = function(startX,startY,diameter,dynamic){
 	var startY =  startY || (Math.floor(Math.random()*(ENV.maxY-ENV.minY-2*radius))+ENV.minY+radius);
 	
 	var dot = new Dot(diameter,color,id,this,startX-radius,startY-radius,diameter);
+	this.dotObj.push(dot);//keep a table of all the dots within the dotWorld object
+
 	this.dots.push(JSON.parse(JSON.stringify({
 		"id":this.dotNum
 		,"top":0
@@ -322,7 +335,7 @@ dotWorld.prototype.addDot = function(startX,startY,diameter,dynamic){
 	}
 	this.dotNum++;
 	this.liveDotsUpdate();
-	return;
+	return dot;
 };
 
 dotWorld.prototype.isAlive = function(id){
@@ -384,6 +397,10 @@ dotWorld.prototype.getEatableDot = function(id,cleft,ctop,radius){//change to ra
 }
 
 dotWorld.prototype.removeDot = function(id){
+	for(var i =0; i < this.dotObj.length; i++){
+		if(this.dotObj[i].id == id)
+			this.dotObj.splice(i,1);
+	}
 	for(var i=0;i<this.dots.length;i++){
 		if(this.dots[i].id==id){
 			this.dots.splice(i,1);
@@ -395,7 +412,13 @@ dotWorld.prototype.removeDot = function(id){
 	}
 	return false;
 }
-
+/**
+	*Tells you if your dot is inside the screen
+	*@param {number} x coordinate of dot
+	*@param {number} y coord of dot
+	*@param {number} radius of dot
+	*@return {bool}  true if dot is in bounds
+*/
 dotWorld.prototype.inBounds = function(x,y,radius){
 	return !((x-radius)<ENV.minX||(x+radius)>ENV.maxX||(y-radius)<ENV.minY||(y+radius)>ENV.maxY);
 }

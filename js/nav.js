@@ -8,6 +8,27 @@ TODO List
 
 *****************************************************/
 
+//Smart rendering of navbar
+jQuery.fn.reverse = [].reverse;
+var responsiveNav = function(){
+	$("#linkContainer > a").css("display","inline");
+	var avail = $("nav.fixed-bar").outerWidth() - $(".my-name").outerWidth()-10;//10 is a buffer
+	$("nav > a").each(function(){
+		avail -= $(this).outerWidth();
+		if(avail < 0)
+			$(this).css("display","none");			
+	});
+	
+};
+$(window).resize(function(){
+	responsiveNav();
+});
+responsiveNav();
+
+
+
+//Following code adds fallbacks for requestAnimationFrame
+
 // http://paulirish.com/2011/requestanimationframe-for-smart-animating/
 // http://my.opera.com/emoller/blog/2011/12/20/requestanimationframe-for-smart-er-animating
  
@@ -134,10 +155,10 @@ var animateSection = function(target){
 		})
 	};
 	var xz = ($(".proj1").css("opacity"));
-	console.log(xz);
+	//console.log(xz);
 	if(!(target==2&& $(".proj1").css("opacity") == 1))
 		newFade(0);
-	console.log(currentDotWorld.hasOwnProperty("slide"));
+	//console.log(currentDotWorld.hasOwnProperty("slide"));
 	if(currentDotWorld.hasOwnProperty("slide")){
 		currentDotWorld.selfDestruct();
 	}

@@ -11,12 +11,16 @@ html(lang="en")
     nav.fixed-bar
       span.my-name Jabez Wesly
       //a(href="http://jabez.org").my-name
-      a(href='https://github.com/jwesly',target="_blank",title="Star Me on Github").github
-        img(src="img/github.svg").github
-      a(href='https://www.linkedin.com/pub/jabez-wesly/a0/181/b25',target="_blank",title="Connect with Me  on LinkedIn").linkedin
-        img(src="img/linkedin.svg").linkedin
-      a(href="mailto:wjabezkingsly@gmail.com",target="_blank",title="Email Me").email
-        img(src="img/email.svg").email
+      span#linkContainer
+        a(href='https://github.com/jwesly',target="_blank",title="Star Me on Github").github
+          span.github.alt Github
+          img(src="img/github.svg").github
+        a(href='https://www.linkedin.com/pub/jabez-wesly/a0/181/b25',target="_blank",title="Connect with Me  on LinkedIn").linkedin
+          span.linkedin.alt LinkedIn
+          img(src="img/linkedin.svg").linkedin
+        a(href="mailto:wjabezkingsly@gmail.com",target="_blank",title="Email Me").email
+          span.email.alt Email
+          img(src="img/email.svg").email
     div#section-container
       section#0
         div.explain

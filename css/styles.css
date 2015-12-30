@@ -42,6 +42,9 @@ nav{
 span.alt{
 	display:none;
 }
+.mobile{
+	display:none;
+}
 /***
 These Don't Work
 @media (max-width:600px){

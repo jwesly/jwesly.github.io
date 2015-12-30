@@ -10,13 +10,24 @@ TODO List
 
 //Smart rendering of navbar
 jQuery.fn.reverse = [].reverse;
+
 var responsiveNav = function(){
-	$("#linkContainer > a").css("display","inline");
+
 	var avail = $("nav.fixed-bar").outerWidth() - $(".my-name").outerWidth()-10;//10 is a buffer
-	$("nav > a").each(function(){
+	$("#linkContainer").removeClass("drop");//hide the icons on navbar
+	//$(".mobile .dropContent a").removeClass("active");
+	$(".mobile").css("display","none");
+
+	$("#linkContainer > a").each(function(){
 		avail -= $(this).outerWidth();
-		if(avail < 0)
-			$(this).css("display","none");			
+		/*if(avail < 0)
+			$(this).css("display","none");*/
+		//console.log(avail);
+		if(avail < 0){
+			$("#linkContainer").addClass("drop");//hide the icons on navbar
+			//$(".mobile .dropContent a").addClass("active");
+			$(".mobile").css("display","inline");
+		}	
 	});
 	
 };
@@ -25,7 +36,15 @@ $(window).resize(function(){
 });
 responsiveNav();
 
-
+$(".hamburger").click(function(){
+	var x = $(".mobile .dropContent");
+	if(x.hasClass("active")){
+		x.removeClass("active");
+	}
+	else{
+		x.addClass("active");
+	}
+});
 
 //Following code adds fallbacks for requestAnimationFrame
 

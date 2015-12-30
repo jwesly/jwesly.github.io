@@ -22,21 +22,13 @@ nav{
 	font-family: 'Orbitron', sans-serif;
 	padding-left: .25vw;
 	vertical-align: middle;
-	max-width:100%;
+	max-width:90%;
 	overflow-x:hidden;
 	overflow-y:hidden;
 	overflow:hidden;
 }
-
-#section-container{
-	position:absolute;
-	height:88%;
-	width:100%;
-	bottom:0em;
-	z-index:10;
-}
-
-nav > a{
+/*my icons*/
+#linkContainer > a{
 	display:inline;
 	position: relative;
 	float: right;
@@ -47,6 +39,14 @@ nav > a{
 	height:7vh;
 	width:7vh;
 }
+span.alt{
+	display:none;
+}
+.mobile{
+	display:none;
+}
+/***
+These Don't Work
 @media (max-width:600px){
 	.email{
 		display:none;
@@ -61,7 +61,9 @@ nav > a{
 	.github{
 		display:none;
 	}
-}
+}****/
+
+
 
 /*
 a.my-name{
@@ -70,11 +72,19 @@ a.my-name{
 	width:40vw;
 }*/
 
+#section-container{
+	position:absolute;
+	height:88%;
+	width:100%;
+	bottom:0em;
+	z-index:10;
+}
+
 section{
 	background-color: black;
 	height:100%;
 }
-
+/*This is the boxes at the bottom, NOT the navbar*/
 ul.nav{
 	position: relative;
 	width:14vw;

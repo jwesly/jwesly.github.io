@@ -6,23 +6,18 @@ Last Updated 12/25/15
 *********************************************************************************************/
 
 /*********************************************************************************************
-KNOWN ISSUES(8/15/15)
-	High memory usage
-		kill world on tab change (Accomplished)
-		plug memory leaks (if they exist) [turns out it was because of the worlds not dying]
-	Huge self-sustaining explosions (likely fixed by screen dependent ENV variables)
-	Too many dots as simulation continues to run (probably because of worlds not dying and being laid over each other.
-	 further fixed by spawn rate becoming a function of live dots)
-	Restart Simulation on Screen Resize
-
-BIG ISSUE(12/25/15)
-	window.requestAnimationFrame should only have one thread per window
-	Requires a rewrite of entire thing
-
-
+TODO
+	Match screen size, not pixels
 
 ************************************************************************************************/
-
+var getCMPerPix = function(){
+	$("body").append('<div id="meter" style="width:1cm; height:1cm"></div>');
+	console.log($("#meter").width());
+	var CMPerPix = 1 / $('#meter').width();
+	$("#meter").remove();
+	console.log("Your screen is ",screen.width * CMPerPix,screen.height * CMPerPix);
+	return CMPerPix;
+};
 var RUNTIME = {};//carries global variables that change at runtime
 
 RUNTIME.liveDots;
@@ -32,11 +27,14 @@ var ENV = {};//contains (mostly) static global variables that affect the Dot eco
 
 var calcENV = function(){
 	ENV.screenHeight = $(window).height();
-	ENV.screenWidth = $(window).width()
-	ENV.screenArea = ENV.screenHeight*ENV.screenWidth;
+	ENV.screenWidth = $(window).width();
+	ENV.CMPerPix = getCMPerPix();
+	ENV.screenArea = ENV.screenHeight*ENV.screenWidth*ENV.CMPerPix*ENV.CMPerPix;
 
-	ENV.initialDots = ENV.screenArea/100000;
+	ENV.initialDots = Math.min(7,ENV.screenArea/300);//no more than 7
+	console.log(ENV.screenArea,ENV.initialDots," initial dots");
 	ENV.maxDots = 15;//impacts performance. stops new spawns
+	//idt it's implemented
 	//Needs to be function of screen size
 
 	ENV.buffer = 25;
@@ -46,8 +44,8 @@ var calcENV = function(){
 	ENV.maxY = ENV.screenHeight-ENV.buffer;
 	ENV.speed = 1.5;
 
-	ENV.minRandDot = Math.min(ENV.screenHeight,ENV.screenWidth)*.02;
-	ENV.maxRandDot = ENV.minRandDot*2;
+	ENV.minRandDot = Math.min(ENV.screenHeight,ENV.screenWidth)*.03;
+	ENV.maxRandDot = ENV.minRandDot*2.5;
 	//function of screen size
 
 	ENV.spawnConstant = 100;//higher constant, less spawns
@@ -56,8 +54,8 @@ var calcENV = function(){
 
 	ENV.eatableRatio = .75;//
 	ENV.directionChangeProb = .01;
-	ENV.freakExplosionDiameter = 75;//min diameter for random explosions
-	ENV.explosionConstant = 3500;//higher constant less explosions
+	ENV.freakExplosionDiameter = 100;//min diameter for random explosions
+	ENV.explosionConstant = 6000;//higher constant less explosions
 	ENV.maxDiameter = Math.min(ENV.screenHeight,ENV.screenWidth)*.5;//if you get this high, you die
 	//Needs to be a function of screen size
 
@@ -413,7 +411,6 @@ dotWorld.prototype.getEatableDot = function(id,cleft,ctop,radius){//change to ra
 }
 
 dotWorld.prototype.removeDot = function(id){
-	console.log(id);
 	for(var i =0; i < this.dotObj.length; i++){
 		if(Number(this.dotObj[i].id.split("magicDot")[1]) == id)
 			this.dotObj.splice(i,1);

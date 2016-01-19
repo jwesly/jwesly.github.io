@@ -1,0 +1,34 @@
+<html lang="es">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title></title>
+	<link href="museum.css" rel="stylesheet">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+</head>
+<body>
+	<h1 id="exTitle" class="toggleInfo"></h1>
+	<div id="exInfo"></div>
+	<!--<a href="#"><img src="img/chevron-left.png" id="left"></a>-->
+	<a href="#"><i class="chevron fa fa-chevron-left" id="left"></i></a>
+	<!--<a href="#"><img src="img/chevron-right.png" id="right"></a>-->
+	<a href="#"><i class="chevron fa fa-chevron-right" id="right"></i></a>
+	<!--<a href="#"><img src="img/chevron-down.png" id="down"></a>-->
+	<a href="#"><i class="chevron fa fa-chevron-down" id="down"></i></a>
+	<!--<a href="#"><img src="img/info2.png" id="toggleInfo" class="toggleInfo"></a>-->
+	<div style="display:none" id="exhibit"></div>
+
+<script src="../js/jquery-1.11.0.js"></script>
+<script src="js/museum.js"></script>
+
+<script>
+//lemme test this out
+var data = [new Exhibit("Eugene Delacroix",
+				"Delacroix was this famous french artist guy",
+				"img/delacroix/artist.jpg")
+			,new Exhibit("Jacques Louis David",
+				"David was the other famous french artist dude",
+				"img/guernica.jpg")];
+
+loadExhibits(data);
+initialize();
+</script>

@@ -1,0 +1,80 @@
+html{
+	background-color: #323232;
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	background-size: auto 100%;
+	background-position: center center;
+}
+
+#exTitle{
+	color:gold;
+	text-align:center;
+	background:#151515;
+	width:30%;
+	margin-right: auto;
+	margin-left:auto;
+	font-family: Impact, Charcoal, sans-serif;
+	padding-bottom:7px; padding-top: 7px;
+	opacity:.7;
+	border: 10px groove gray;
+	cursor:pointer;
+}
+#exInfo{
+	width:45%;
+	margin-right: auto;
+	margin-left:auto;
+	background:black;
+	color:white;
+	font-family: ‘Trebuchet MS’, Helvetica, sans-serif;
+	font-size:1.5em;
+	padding:20px;
+	opacity:.9;
+	border:5px solid white;
+}
+#toggleInfo{
+	position:absolute;
+	width:60px;
+	top: 3vh;
+	right: 3vw;
+	/*bottom:7px;
+	
+	left: 0;
+	right: 0;
+	margin: 0 auto;
+	*/
+}
+a .chevron{
+	opacity: .95;
+	color: #121212;
+	font-size: 30vh;
+}
+#left,#right{
+	position: absolute;
+	margin-top: auto; margin-bottom: auto;
+	top: 0; bottom: 0;
+	height:30vh;
+	line-height: 30vh;
+}
+#left{
+	left: 5vw; right: auto;
+}
+#right{
+	
+	right: 5vw; left: auto;
+	
+
+	/*
+	height: 50%;
+	margin:auto;
+	position:absolute;
+	right:20px; left:auto; top:0; bottom:0;
+	*/
+}
+
+#down{
+	width: 25%;
+	text-align:center;
+	margin-right:auto;margin-left: auto;
+	position: absolute;
+	bottom: 5vh; top: auto; left:0; right:0;
+}

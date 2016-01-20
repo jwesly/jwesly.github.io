@@ -2,7 +2,6 @@ html{
 	background-color: #323232;
 	background-repeat: no-repeat;
 	background-attachment: fixed;
-	background-size: auto 100%;
 	background-position: center center;
 }
 
@@ -47,6 +46,7 @@ a .chevron{
 	opacity: .95;
 	color: #121212;
 	font-size: 30vh;
+	text-decoration: none;
 }
 #left,#right{
 	position: absolute;

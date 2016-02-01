@@ -7,6 +7,8 @@ background
 
 TODO
 	Figure out if image dimension code makes you reload the image
+	Have url's to exhibits
+	Save your place in the museum
 
 ***************************/
 

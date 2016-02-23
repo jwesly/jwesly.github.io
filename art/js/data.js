@@ -4,6 +4,7 @@ var data = [
 	,"description":"Delacroix was the greatest"
 	,"background":"img/delacroix/artist.jpg"
 	,"fit":"vertical"
+	,"uri":"delacroix"
 }
 	,{
 		"title":"Liberty Leading the People"
@@ -16,6 +17,7 @@ var data = [
 	,"description": "He was pretty good also"
 	,"background":"img/picasso/artist.jpg"
 	,"fit":"vertical"
+	,"uri":"picasso"
 }
 	,{
 		"title":"Guernica"
@@ -36,6 +38,7 @@ var data = [
 ,[{	"title":"Velazquez, Diego"
 	,"description": ""
 	,"background":"img/velazquez/artist.jpg"
+	,"uri":"velazquez"
 }
 	,{
 		"title":"Las Meninas"
@@ -45,6 +48,7 @@ var data = [
 ,[{	"title":"Homer, Winslow"
 	,"description": ""
 	,"background":"img/homer/artist.jpg"
+	,"uri":"homer"
 }
 	,{
 		"title":"The Gulf Stream"
@@ -55,6 +59,7 @@ var data = [
 	"title":"West, Benjamin"
 	,"description": ""
 	,"background":"img/benjaminwest/artist.jpg"
+	,"uri":"west"
 }
 	,{
 		"title":"Death of General Wolfe"
@@ -64,6 +69,7 @@ var data = [
 ,[{	"title":"Sargent, John"
 	,"description": ""
 	,"background":"img/sargent/artist.jpg"
+	,"uri":"sargent"
 }
 	,{
 		"title":"Madame X"
@@ -73,10 +79,66 @@ var data = [
 ,[{	"title":"Whistler, James McNeill"
 	,"description": ""
 	,"background":"img/whistler/artist.jpg"
+	,"uri":"whistler"
 }
 	,{
 		"title":"Whistler's Mother"
 		,"description":""
 		,"background":"img/whistler/mother.jpg"
+	}]
+,[{	"title":"Magritte, Rene"
+	,"description": "Magic Realism"
+	,"background":"img/magritte/artist.jpg"
+	,"uri":"magritte"
+}
+	,{
+		"title":"The Human Condition"
+		,"description":""
+		,"background":"img/magritte/humanCondition.jpg"
+	}
+	,{
+		"title":"Time Transfixed"
+		,"description":""
+		,"background":"img/magritte/timeTransfixed.jpg"
+	}
+	,{
+		"title":"Menaced Assassin"
+		,"description":""
+		,"background":"img/magritte/menacedAssassin.jpg"
+	}
+	,{
+		"title":"Threshold of Liberty"
+		,"description":""
+		,"background":"img/magritte/thresholdOfLiberty.jpg"
+	}
+	,{
+		"title":"Treachery of Images"
+		,"description":""
+		,"background":"img/magritte/treacheryOfImages.jpg"
+	}
+	,{
+		"title":"Key of Dreams"
+		,"description":""
+		,"background":"img/magritte/keyOfDreams.jpg"
+	}
+	,{
+		"title":"Clairvoyance"
+		,"description":""
+		,"background":"img/magritte/clairvoyance.jpg"
+	}
+	,{
+		"title":"Not To Be Reproduced"
+		,"description":""
+		,"background":"img/magritte/noReproduce.jpg"
+	}
+	,{
+		"title":"Son of Man"
+		,"description":""
+		,"background":"img/magritte/sonOfMan.jpg"
+	}
+	,{
+		"title":"False Mirror"
+		,"description":""
+		,"background":"img/magritte/falseMirror.jpg"
 	}]
 ]

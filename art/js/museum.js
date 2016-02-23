@@ -15,7 +15,7 @@ TODO
 var screenRatio;
 var getScreenSize = function(){
 
-	console.log("resizing",$(document).width(),$(document).height());
+	//console.log("resizing",$(document).width(),$(document).height());
 	screenRatio = $(document).width()/$(document).height();
 }
 
@@ -27,6 +27,7 @@ $(window).resize(function(){
 });
 
 var museum;
+var baseURL;
 
 function Exhibit(title,description,background_image){
 	this.title = title;
@@ -36,6 +37,7 @@ function Exhibit(title,description,background_image){
 
 function loadExhibits(array){
 	museum = array;
+	initialize();
 }
 
 var leftMove = function(){
@@ -88,6 +90,10 @@ var displayEx = function(i,j){
 	if(j===undefined)//default j to 0
 		j = 0;
 	var thisSlide = museum[i][j];
+	//HTML 5 only
+	//F compatibility
+	//window.history.pushState({title:thisSlide.title,uri:Turi}, thisSlide.title, baseURL + "#" + Turi);
+
 	$("html").data("slide",i);
 	$("html").data("down",j);
 	$("#exInfo").hide();
@@ -105,7 +111,7 @@ var displayEx = function(i,j){
 		// just in case it is not already loaded
 		$(image).load(function () {
 			//console.log(image.width, image.height);
-			console.log(image.width/image.height,screenRatio)
+			//console.log(image.width/image.height,screenRatio)
 			if(image.width/image.height  < screenRatio)
 				$("html").css("background-size", "auto 100%");
 			else
@@ -113,13 +119,33 @@ var displayEx = function(i,j){
 		});
 		image.src = image_url;
 	}
+	console.log(museum[i][0].uri);
+	window.location.hash = museum[i][0].uri;
 
-	
+	//wow what laziness
+	//definitely the worst way to do this
+	window.setTimeout(function(){
+		window.location.hash = museum[i][0].uri;
+	},500);
+	//alert("yup");	
 }
 
 function initialize(){
 	$(function(){
-		displayEx(0);
+		baseURL = document.location.href.split("#")[0];
+		var artTarget = document.location.href.split("#")[1];
+		console.log(baseURL,artTarget,typeof(artTarget))
+		var tarNum = 0;
+		if(artTarget){
+			for(var i=0; i<museum.length; i++){
+				console.log(museum[i][0].uri);
+				if(artTarget.toLowerCase() == museum[i][0].uri.toLowerCase()){
+					tarNum = i;
+					break;
+				}
+			}
+		}
+		displayEx(tarNum);
 		$(".toggleInfo").click(function(){
 			$("#exInfo").toggle();
 		});

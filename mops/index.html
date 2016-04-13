@@ -107,7 +107,9 @@ var getCodes = function(id,tc){
 var t = getQueryVariable("teacher");
 var output = getCodes(getQueryVariable("id"),t||"MACK");
 //document.write(output);
-document.body.appendChild(document.createElement("<p>"+output+"</p>"));
+var para = document.createElement("p");
+para.innerHTML = output;
+document.body.appendChild(para);
 </script>
 </body>
 </html>

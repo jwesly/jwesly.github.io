@@ -103,10 +103,11 @@ var getCodes = function(id,tc){
 	return alldemcodes;
 }
 
+
 var t = getQueryVariable("teacher");
 var output = getCodes(getQueryVariable("id"),t||"MACK");
 //document.write(output);
-document.body.appendChild("<p>"+output+"</p>")
+document.body.appendChild(document.createElement("<p>"+output+"</p>"));
 </script>
 </body>
 </html>

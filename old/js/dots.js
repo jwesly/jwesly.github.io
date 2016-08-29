@@ -12,10 +12,10 @@ TODO
 ************************************************************************************************/
 var getCMPerPix = function(){
 	$("body").append('<div id="meter" style="width:1cm; height:1cm"></div>');
-	//console.log($("#meter").width());
+	console.log($("#meter").width());
 	var CMPerPix = 1 / $('#meter').width();
 	$("#meter").remove();
-	//console.log("Your screen is ",screen.width * CMPerPix,screen.height * CMPerPix);
+	console.log("Your screen is ",screen.width * CMPerPix,screen.height * CMPerPix);
 	return CMPerPix;
 };
 var RUNTIME = {};//carries global variables that change at runtime
@@ -32,7 +32,7 @@ var calcENV = function(){
 	ENV.screenArea = ENV.screenHeight*ENV.screenWidth*ENV.CMPerPix*ENV.CMPerPix;
 
 	ENV.initialDots = Math.min(7,ENV.screenArea/300);//no more than 7
-	//console.log(ENV.screenArea,ENV.initialDots," initial dots");
+	console.log(ENV.screenArea,ENV.initialDots," initial dots");
 	ENV.maxDots = 15;//impacts performance. stops new spawns
 	//idt it's implemented
 	//Needs to be function of screen size
@@ -204,7 +204,7 @@ Dot.prototype.animate = function() {
 					ctop+=75;
 				else
 					ctop-=75;
-				//console.log(that.id+" iter>1000 "+String(cleft)+" "+String(ctop)+" "+String(radius));
+				console.log(that.id+" iter>1000 "+String(cleft)+" "+String(ctop)+" "+String(radius));
 				if(iteri==1005)
 					if(explode()){
 						return;
@@ -281,7 +281,7 @@ var dotWorld = function(slide,wcount){
 		//console.log(ENV.spawnConstant*Math.pow(RUNTIME.liveDots,ENV.liveDotExponent));
 		if(Math.floor(Math.random()*ENV.spawnConstant*Math.pow(RUNTIME.liveDots,ENV.liveDotExponent))==0){
 			//console.log("new spawn");
-			//console.log("new spawn on world ",that.worldCount);
+			console.log("new spawn on world ",that.worldCount);
 			that.addDot();
 			
 		}
@@ -312,7 +312,7 @@ dotWorld.prototype.selfDestruct = function(){
 //console logs how many dots there are
 dotWorld.prototype.liveDotsUpdate = function(){
 	RUNTIME.liveDots = this.dots.length;
-	//console.log(RUNTIME.liveDots," in world ",this.worldCount);
+	console.log(RUNTIME.liveDots," in world ",this.worldCount);
 	return this.dots.length;
 }
 
@@ -353,7 +353,7 @@ dotWorld.prototype.isAlive = function(id){
 			return true;
 	}
 	if(id==DEBUG.watch){
-		//console.log("cause of death",this.dots);
+		console.log("cause of death",this.dots);
 		//DEBUG.pause = true;
 	}
 	return false;

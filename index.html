@@ -412,10 +412,15 @@ License URL: http://creativecommons.org/licenses/by/3.0/
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="js/bootstrap.js"></script>
-    <script src="js/dots.js"></script>
+
+	<script src="js/dots.js"></script>    
+    <script src="js/DotWorld.js"></script>
     <script>
-    var worldCounter = 0;
-    new dotWorld($("#dot-container"),worldCounter);
+    //var worldCounter = 0;
+    //new dotWorld($("#dot-container"),worldCounter);
+
+	var world = new DotWorld("dot-container",'<div class="container"><div class="banner-text agileinfo-text"> <h1>Jabez Wesly</h1><h6>Developer</h6></div></div>');
+	world.run();
     </script>
 </body>
 </html>

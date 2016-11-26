@@ -4,7 +4,11 @@ CONTAINING BLOCK MUST BE POSITIONED!!!!
 Radius is in terms of percentage (height?) of the box you get. Converted to actual pixels before actually rendering
 Location is of the center of the dot
 
+
+TODO - fix increased jitteriness - it's most likely because I'm rewriting instead of just modifying DOM elements
 TODO readjust box size on page resize - update: done but a little glitchy
+
+
 
 */
 
@@ -44,7 +48,7 @@ DotWorld.prototype.calculateEnvironment = function(){
 	ENV.boxWidth = box.clientWidth;
 	ENV.totalHeight = Math.min(ENV.boxHeight,ENV.boxWidth) == ENV.boxHeight ? 100 : ENV.boxHeight/ENV.boxWidth * 100;
 	ENV.totalWidth = ENV.totalHeight==100 ? ENV.boxWidth/ENV.boxHeight * 100: 100;
-	console.log(ENV.boxHeight,ENV.boxWidth,ENV.totalHeight,ENV.totalWidth)
+	console.log(ENV.boxHeight,ENV.boxWidth,ENV.totalHeight,ENV.totalWidth);
 
 	ENV.minSpeed = .1;
 	ENV.maxSpeed = .55;//standard units
@@ -199,7 +203,8 @@ DotWorld.prototype.draw = function(){
 	document.getElementById(this.containerID).innerHTML = html;
 }
 
-DotWorld.prototype.run = function(){
+DotWorld.prototype.run = function(frame){
+
 	this.generateNewState();
 	this.draw();
 	window.requestAnimationFrame(this.run.bind(this));

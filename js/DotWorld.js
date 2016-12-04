@@ -75,7 +75,7 @@ DotWorld.prototype.calculateEnvironment = function(){
 	return ENV;
 }
 DotWorld.prototype.getNewSpeed = function(){
-	return getRandomFromRange(this.env.minSpeed,this.env.maxSpeed);
+	return getRandomFromRange(this.env.minSpeed,this.env.maxSpeed)*(getRandomBool(2)?1:-1);
 }
 
 DotWorld.prototype.newRandomDot= function(){

@@ -1,0 +1,23 @@
+{
+  "name": "jwesly.github.io",
+  "version": "4.0.0",
+  "description": "This repo contains the convoluted source code of the greatest website on Earth.",
+  "main": "server.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "sudo nodejs server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jwesly/jwesly.github.io.git"
+  },
+  "author": "Jabez Wesly",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jwesly/jwesly.github.io/issues"
+  },
+  "homepage": "https://github.com/jwesly/jwesly.github.io#readme"
+}

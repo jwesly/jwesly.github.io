@@ -1,0 +1,44 @@
+html{
+	height: 100%;
+	width: 100%;
+	overflow: hidden;
+	background: #000;
+	font-size: 4vh;
+    color: #fff;
+	font-weight: 100;
+}
+body {
+	height: 100%;
+	width: 100%;
+	overflow: hidden;
+}
+#dot-container {
+	height: 100%;
+	width: 100%;
+}
+.info-container {
+	/*top right bottom left */
+    height: 70vh;
+    width: 70vw;
+    padding: 6vh 6vw 6vh 6vw;
+    position: absolute;
+  	top: 50%;
+  	left: 50%;
+  	margin: -38vh 0 0 -38vw;
+    text-align: left;
+    background-color: #232323;
+    border: 1vh solid #696969;
+    opacity: .65;
+    z-index: 2;
+}
+.info-container > div {
+	margin-top: 2vh;
+}
+.info-container div a {
+	font-weight: 600;
+	text-decoration: underline;
+	color: #fff;
+}
+.bolder{
+	font-weight: 900;
+}

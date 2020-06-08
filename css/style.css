@@ -1,0 +1,172 @@
+/*--
+Author: W3layouts
+Author URL: http://w3layouts.com
+License: Creative Commons Attribution 3.0 Unported
+License URL: http://creativecommons.org/licenses/by/3.0/
+--*/
+html{
+    height:100%;
+}
+#dot-container{
+    height:100%;
+    overflow:hidden;
+    width:100%;
+    background-color: #000;
+    position: absolute;
+}
+#info-container{  
+    text-align: center;
+    background-color: #232323;
+    border: 1px solid #ec407a;
+    opacity: .72;
+    display: inline-block;
+    padding: 4em;
+    z-index:2;
+    position:absolute;
+    margin-left: 15%;
+    margin-top:15%;
+}
+
+#info-container h1 {
+    font-size: 3.5em;
+    color: #fff;
+    font-weight: 900;
+}
+#info-container h4 {
+    font-size: 1.6em;
+    color: #fff;
+    font-weight: 900;
+    margin-top: .3em;
+}
+#info-container h6 {
+    font-size: 1.2em;
+    color: #cac7c8;
+    margin-top: 1em;
+    letter-spacing: 3px;
+    font-weight: 900;
+}
+
+body{
+	margin:0;
+	font-family: 'Roboto Condensed', sans-serif;
+	background: #fff;
+    height:100%;
+}
+body a{
+	transition: 0.5s all;
+	-webkit-transition: 0.5s all;
+	-moz-transition: 0.5s all;
+	-o-transition: 0.5s all;
+	-ms-transition: 0.5s all;
+	text-decoration:none;
+}
+h1,h2,h3,h4,h5,h6{
+	margin:0;	
+	font-family: 'Baloo Chettan', cursive;
+}
+p{
+	margin:0;
+}
+ul,label{
+	margin:0;
+	padding:0;
+}
+body a:hover{
+	text-decoration:none;
+}
+/*-- banner --*/  
+.banner-text {
+    
+}
+
+/*-- //banner --*/  
+
+/*-- //footer --*/
+/*-- responsive-design --*/
+@media(max-width:1440px){
+}
+@media(max-width:1366px){
+}
+@media(max-width:1280px){
+}
+@media(max-width:1080px){
+.nav > li { 
+    padding: 1.5em 1.5em;
+} 
+}
+@media(max-width:1024px){
+.banner-text {
+    margin: 22em 0 7.1em; 
+}
+.banner-text h1 {
+    font-size: 3.2em; 
+}
+.banner-text {
+    margin: 22em 0 6em;
+    padding: 3em;
+}
+}
+@media(max-width:800px){
+.banner-text h1 {
+    font-size: 2.8em;
+}
+}
+
+@media(max-width:736px){
+.banner-text {
+    margin: 19em 0 6em; 
+}
+.banner-text h1 {
+    font-size: 2.5em;
+}
+.banner-text h6 {
+    font-size: 1.1em; 
+    letter-spacing: 2px; 
+}
+}
+@media (max-width: 667px){
+.banner-text {
+    margin: 16em 0 6em;
+}
+}
+
+@media(max-width:480px){
+.banner-text {
+    margin: 13em 0 6em;
+} 
+.banner-text h6 {
+    font-size: 1em; 
+    letter-spacing: 0; 
+}
+.banner-text h1 {
+    font-size: 1.8em;
+} 
+}
+@media(max-width:414px){
+.banner-text {
+    margin: 23.5em 0 6em;
+	padding: 2em;
+}  
+
+}
+@media(max-width:384px){
+.banner-text {
+    margin: 16.6em 0 6em;
+}
+.banner-text h1 {
+    font-size: 1.8em;
+} 
+}
+@media(max-width:320px){
+.banner-text h1 {
+    font-size: 1.5em;
+}
+.banner-text h6 {
+    font-size: 0.9em; 
+}
+.banner-text {
+    margin: 15em 0 2.6em;
+	padding: 1.2em 1.5em;
+}
+}
+/*-- //responsive-design --*/

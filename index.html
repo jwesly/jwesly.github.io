@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<title>Jabez Wesly</title> 
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="Jabez Wesly, Writer, Jabez, Wesly" />
+<style>
+	html{
+		height:100%;
+	}
+	#dot-container{
+		height:100%;
+		overflow:hidden;
+		width:100%;
+		background-color: #000;
+		position: absolute;
+	}
+	body{
+		margin:0;
+		background: #fff;
+		height:100%;
+	}
+</style>
+</head>
+<body>
+	<div id="dot-container"></div>
+	<script src="js/dots.js"></script>    
+	<script src="js/DotWorld.js"></script>
+	<script>
+		var world = new DotWorld("dot-container",'<div></div>');
+		world.run(0);
+	</script>
+</body>
+</html>
